@@ -22,21 +22,52 @@ class ViewerTest {
         app = SpringApplication.run(CinemaApplicationRun.class);
         appCon = new AnnotationConfigApplicationContext(JavaConfig.class);
 
-        V1 = (Viewer) appCon.getBean("beanViewer","Artem", 26, 50);
+        V1 = (Viewer) appCon.getBean("beanViewer","Artem", 26, new ArrayList<Viewer>());
     }
 
     @Test
     void getCountFilmsTest() {
-        int expected = 10;
-        V1.setCountFilms(expected);
+        int expected = 3;
+        Cinema C1 = new Cinema("Avengers", "Fantastic", 2.5);
+        Cinema C2 = new Cinema("I,m a robot", "Detective", 2.5);
+        Cinema C3 = new Cinema("the last samurai", "drama", 2.5);
+
+        List<Cinema> cinemas = new ArrayList<>();
+        cinemas.add(C1);
+        cinemas.add(C2);
+        cinemas.add(C3);
+
+        V1.setListF(cinemas);
         assertEquals(expected, V1.getCountFilms());
     }
 
     @Test
-    void setCountFilmsTest() {
-        int expected = 10;
-        V1.setCountFilms(expected);
-        assertEquals(expected, V1.getCountFilms());
+    void setListFTest() {
+        Cinema C1 = new Cinema("Avengers", "Fantastic", 2.5);
+        Cinema C2 = new Cinema("I,m a robot", "Detective", 2.5);
+        Cinema C3 = new Cinema("the last samurai", "drama", 2.5);
+
+        List<Cinema> cinemas = new ArrayList<>();
+        cinemas.add(C1);
+        cinemas.add(C2);
+        cinemas.add(C3);
+
+        V1.setListF(cinemas);
+        assertEquals(cinemas, V1.getListF());
+    }
+    @Test
+    void getListFTest() {
+        Cinema C1 = new Cinema("Avengers", "Fantastic", 2.5);
+        Cinema C2 = new Cinema("I,m a robot", "Detective", 2.5);
+        Cinema C3 = new Cinema("the last samurai", "drama", 2.5);
+
+        List<Cinema> cinemas = new ArrayList<>();
+        cinemas.add(C1);
+        cinemas.add(C2);
+        cinemas.add(C3);
+
+        V1.setListF(cinemas);
+        assertEquals(cinemas, V1.getListF());
     }
 
     @Test

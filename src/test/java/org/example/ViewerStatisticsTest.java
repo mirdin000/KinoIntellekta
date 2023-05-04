@@ -22,11 +22,24 @@ class ViewerStatisticsTest {
         app = SpringApplication.run(CinemaApplicationRun.class);
         appCon = new AnnotationConfigApplicationContext(JavaConfig.class);
 
-        Viewer V1 = (Viewer) appCon.getBean("beanViewer","Artem", 26, 50);
-        Viewer V2 = (Viewer) appCon.getBean("beanViewer","Mark", 22, 41);
-        Viewer V3 = (Viewer) appCon.getBean("beanViewer","Masha", 20, 60);
-        Viewer V4 = (Viewer) appCon.getBean("beanViewer","Nikolay", 18, 16);
-        Viewer V5 = (Viewer) appCon.getBean("beanViewer","Alex", 26, 15);
+        Cinema C1 = (Cinema) appCon.getBean("beanCinema", "the last samurai", "drama", 2.5);
+        Cinema C2 = (Cinema) appCon.getBean("beanCinema", "I,m a robot", "Detective", 2.5);
+        Cinema C3 = (Cinema) appCon.getBean("beanCinema", "the last samurai", "drama", 2.5);
+        Cinema C4 = (Cinema) appCon.getBean("beanCinema", "Avengers", "Fantastic", 2.5);
+        Cinema C5 = (Cinema) appCon.getBean("beanCinema", "I,m a robot", "Detective", 2.5);
+
+        List<Cinema> cinemas = new ArrayList<>();
+        cinemas.add(C1);
+        cinemas.add(C2);
+        cinemas.add(C3);
+        cinemas.add(C4);
+        cinemas.add(C5);
+
+        Viewer V1 = (Viewer) appCon.getBean("beanViewer","Artem", 26, cinemas);
+        Viewer V2 = (Viewer) appCon.getBean("beanViewer","Mark", 22, cinemas);
+        Viewer V3 = (Viewer) appCon.getBean("beanViewer","Masha", 20, cinemas);
+        Viewer V4 = (Viewer) appCon.getBean("beanViewer","Nikolay", 18, cinemas);
+        Viewer V5 = (Viewer) appCon.getBean("beanViewer","Alex", 26, cinemas);
 
         listV = new ArrayList<>();
         listV.add(V1);
@@ -34,7 +47,6 @@ class ViewerStatisticsTest {
         listV.add(V3);
         listV.add(V4);
         listV.add(V5);
-        listV.forEach(V -> System.out.println("Age: " + V.getAge()));
     }
 
     @Test
